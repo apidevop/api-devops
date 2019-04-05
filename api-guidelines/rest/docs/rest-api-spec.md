@@ -203,19 +203,19 @@ than abstract names.
 ## Request headers Parameters
 | Parameter name   | Required      | Description  |
 | :------------- | :-------------: | :-----|
-| Authorization | Yes			| Required only when authorization is necessary |
-| Accept-Encoding| Yes     | HTTP compression is mandatory |
-| Api-Key | Yes     | API consumer unique key  |
+| Authorization | Yes   | Needed only when authorization is necessary |
+| Accept-Encoding| Yes  | HTTP compression is mandatory |
+| Api-Key | Yes     | API consumer unique application key  |
 | Accept | No     | Required for content and version negotiation |
-| Accept-Language | No     | Used for region and language selection, using ISO region and language Code, example [language]-[region], se-SV (Swedish) |
+| Accept-Language | No     | Used for region and language selection, using ISO region and language Code,|
 | OIDC-ClientId | Yes     | Client id (Audience), that identifies consuming client org Id relying party. Required only when using org Id REF access tokens |
 | OIDC-Issuer | Yes     | REF token issuer, required only when using org Id REF access tokens|
-| Api-OperationId | No     | Id used for tracking operation execution end to end for fault tracing purposes|
+| Backend-OperationId | No     | Id used for tracking operation execution end to end for fault tracing purposes|
 
 ## Response headers Parameters
 | Parameter name   | Required      | Description  |
 | ------------- |:-------------:| -----:|
-| org-Api-Region | No			| Returns which region that handled the request |
+| Backend-Region | No			| Returns which region that handled the request |
 
 ## Simplify associations - sweep complexity under the ‘?’
 
