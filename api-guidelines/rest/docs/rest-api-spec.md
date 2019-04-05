@@ -205,12 +205,12 @@ than abstract names.
 | :------------- | :-------------: | :-----|
 | Authorization | Yes			| Required only when authorization is necessary |
 | Accept-Encoding| Yes     | HTTP compression is mandatory |
-| org-Api-Key | Yes     | API consumer unique key  |
+| Api-Key | Yes     | API consumer unique key  |
 | Accept | No     | Required for content and version negotiation |
 | Accept-Language | No     | Used for region and language selection, using ISO region and language Code, example [language]-[region], se-SV (Swedish) |
-| org-Oidc-ClientId | Yes     | Client id (Audience), that identifies consuming client org Id relying party. Required only when using org Id REF access tokens |
-| org-Oidc-Issuer | Yes     | REF token issuer, required only when using org Id REF access tokens|
-| org-Api-OperationId | No     | Id used for tracking operation execution end to end for fault tracing purposes|
+| OIDC-ClientId | Yes     | Client id (Audience), that identifies consuming client org Id relying party. Required only when using org Id REF access tokens |
+| OIDC-Issuer | Yes     | REF token issuer, required only when using org Id REF access tokens|
+| Api-OperationId | No     | Id used for tracking operation execution end to end for fault tracing purposes|
 
 ## Response headers Parameters
 | Parameter name   | Required      | Description  |
