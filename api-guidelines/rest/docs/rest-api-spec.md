@@ -396,8 +396,7 @@ We highly recommend you add a link in your description to more information, like
 does.
 
 
-## Tips for versioning..............................................................................................................................
-
+## Tips for versioning.
 Versioning is one of the most important considerations when designing your Web API.
 
 **Never release an API without a version and make the version mandatory.**
@@ -1135,13 +1134,13 @@ content&content_ID=developer/library_download_sdks
 in page on a platform’s existing developer community.
 
 
-## The API Façade Pattern
+## The API Facade Pattern
 
 At this point, you may be asking -
 
-_What should we be thinking from an architectural perspective?_
+What should we be thinking from an architectural perspective?
 
-_How do we follow all these best practice guidelines, expose my internal services and systems in
+How do we follow all these best practice guidelines, expose my internal services and systems in
 a way that’s useful to app developers, and still iterate and maintain my API?_
 
 Back-end systems of record are often too complex to expose directly to application
@@ -1163,23 +1162,7 @@ they don’t work well.
 In the build-up approach, a developer exposes the core objects of a big system and puts an
 XML parsing layer on top.
 
-Big
-system
-
-DB Content
-Mgmt
-
-SOAP JDBC^ RSS^
-
-
-Big System
-
-Expose Objects
-
-
 XML
-
-
 This approach has merit in that it can get you to market with version 1 quickly. Also, your
 API team members ( your internal developers) already understand the details of the
 system.
@@ -1206,28 +1189,6 @@ A drawback of the standards committee pattern is that it can be slow. Even if yo
 document created quickly, getting everybody to implement against it can be slow and can
 lack adherence. This approach can also lead to a mediocre design as a result of too many
 compromises.
-
-Big System
-
-Expose
-
-### XML
-
-### DB
-
-Expose
-
-### XML
-
-Content
-Mgmt
-
-Expose RSS
-
-### XML
-
-Standards
-Doc
 
 **The Copy Cat Approach**
 
@@ -1275,8 +1236,6 @@ API and give you feedback even before your API is connected to internal systems.
 
 3 - Mediate or integrate between the façade and the systems.
 
-```
-```
 ##API Facade
 Using the three-step approach you’ve decomposed one big problem to three smaller
 problems. If you try to solve the one big problem, you’ll be starting in code, and trying to
@@ -1303,12 +1262,7 @@ cases regardless of whether they are internal developer, partner, or open scenar
 API team will be able to keep pace with the changing needs of developers, including the
 ever-changing protocols and languages. It is also easier to extend an API by building out
 more capability from your enterprise or plugging in additional existing systems.
-```
-```
 
-```
-
-```
 ## References 
 
 Representational State Transfer (REST), Roy Thomas Fielding, 2000
