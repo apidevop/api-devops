@@ -592,11 +592,12 @@ Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn sta
 is used in the same way as the Facebook offset & limit.
 
 To get records 50 through 75 from each system, you would use:
-
+```
 - Facebook - **offset 50** and **limit 25**
 - Twitter - **page 3** and **rpp 25** (records per page)
 - LinkedIn - **start 50** and **count 25**
 
+```
 **Use limit and offset**
 
 We recommend limit and offset. It is more common, well understood in leading databases,
@@ -671,12 +672,16 @@ Here's what the syntax looks like for a few key APIs.
 
 **Google Data**
 
+```
 ?alt=json
 
+```
 **Foursquare**
 
+```
 /venue.json
 
+```
 **Digg***
 
 Accept: application/json
@@ -691,11 +696,13 @@ document what to do if there are conflicts.
 We recommend the Foursquare approach.
 
 To get the JSON format from a collection or specific element:
-
+```
 bears.json
+```
 
+```
 /bears/1234.json
-
+```
 Developers and even casual users of any file system are familiar to this dot notation. It also
 requires just one additional character (the period) to get the point across.
 
@@ -768,11 +775,11 @@ Our Goal is to provide self describing APIs where links help the API consumer ho
 ### Hypermedia Support for relationships
 
 A response ...
-
+```
 - MUST return a link element to **self**
 - MUST return links to **sub-resource**
 - SHOULD return links to **related objects**
-
+```
 ##### Example Request
 
 	GET /invoices/INV-567A89HG1
@@ -780,7 +787,7 @@ A response ...
 
 ##### Example Response
 HAL response Format
-
+```
 	{
 	  "_links":
 		{
@@ -796,16 +803,18 @@ HAL response Format
 	  "customer_id": "CUST-12ATCVWV",
 	  "customer_name": "Max Mustermann"
 	}
-
+```
 ### Modeling Relationships
 
 Relationships are often modeled by a **sub-resource**.
 Use the following pattern for sub-resources.
 
+	```
 	GET  /{resource}/{resource-id}/{sub-resource}
 	GET  /{resource}/{resource-id}/{sub-resource}/{sub-resource-id}
 	POST /{resource}/{resource-id}/{sub-resource}
-
+    
+    ```
 > :information_source: Limit the depth of your URIs to ony one sub-resource to keep the API clean and simple.
 
 ### When to use sub-resources
@@ -815,18 +824,21 @@ Use the following pattern for sub-resources.
 In case of a 1:N relationship, where the child object is existentially dependent on the parent object use a sub-resource. “Existentially dependent” means that a child object cannot exist without its parent.
 An example of such a relationship are lineitems of an invoice.
 
+	```
 	GET  /invoices/INV-567A89HG1/lineitems
 	POST /invoices/INV-567A89HG1/lineitems
-
+    
+    ```
 #### Belongs to relationship
 
 If you have a "Belongs to" relationship use a sub-resource.
 
 Invoices belong to a customer. To get all invoices to a specific customer, or to create a new invoice for that customer, do a GET or a POST:
-
+    ```
 	GET  /customers/CUST-12ATCVWV/invoices
 	POST /customers/CUST-12ATCVWV/invoices
-
+    
+    ```
 Other samples are  "A dog belongs to an owner",  "a shirt belongs to a person".
 
 #### N:M relationship
@@ -837,20 +849,24 @@ If you need to query both sides of the relationship often, then two sub-resource
 
 A good example is a car pool. There are N drivers and M cars.
 
+	```
 	GET /cars/CAR-3767FSHS/drivers
 	GET /drivers/DRI-ZU99983/cars
-
+   
+    ```
 
 ### Using a query parameter instead of sub-resources
 
 Another valid option is to use query parameters instead of sub-resources in case of the Belongs to and N:M relationship.
 
+	```
 	GET  /invoices?customer_id=CUST-12ATCVWV
 	POST /invoices
 
 	GET /drivers?car_id=CAR-3767FSHS
 	GET /cars?driver_id=DRI-ZU99983
-
+    
+    ```
 It is important to be consistent how to design your API.
 
 ## Tips for search
@@ -866,8 +882,10 @@ If you want to do a global search across resources, we suggest you follow the Go
 
 **Global search**
 
+```
 /search?q=fluffy+fur
 
+```
 Here, search is the verb; **?q** represents the query.
 
 **Scoped search**
@@ -875,8 +893,10 @@ Here, search is the verb; **?q** represents the query.
 To add scope to your search, you can prepend with the scope of the search. For example,
 search in bears owned by resource ID 5678
 
+```
 /owners/5678/bears?q=fluffy+fur
 
+```
 Notice that we’ve dropped the explicit search in the URL and rely on the parameter ‘q’ to
 indicate the scoped query. (Big thanks to the contributors on the API Craft Google group for
 helping refine this approach.)
@@ -886,9 +906,10 @@ helping refine this approach.)
 For search or for any of the action oriented (non-resource) responses, you can prepend
 with the format as follows:
 
+```
 /search.xml?q=fluffy+fur
 
-
+```
 ## Consolidate API requests in one subdomain
 
 We’ve talked about things that come after the top-level domain. This time, let's explore
@@ -908,10 +929,12 @@ api.foursquare.com
 
 Twitter has three APIs; two of them focused on search and streaming.
 
+```
 stream.twitter.com
 api.twitter.com
 search.twitter.com
 
+```
 It's easy to understand how Facebook and Twitter ended up with more than one API. It has
 a lot to do with timing and acquisition, and it's easy to reconfigure a CName entry in your
 DNS to point requests to different clusters.
@@ -951,12 +974,14 @@ Say a developer types api.teachbearrest.com in the browser but there's no other
 information for the GET request, you can probably safely redirect to your developer portal
 and help get the developer where they really need to be.
 
+```
 api developers (if from browser)
 
 dev  developers
 
 developer  developers
 
+```
 
 ## Tips for handling exceptional behavior
 
@@ -996,10 +1021,13 @@ respond to it.
 
 **Overall recommendations:**
 
+```
+
 1 - Use suppress_response_codes = true
 
 2 - The HTTP code is no longer just for the code
 
+```
 The rules from our previous Handling Errors section change. In this context, the HTTP code
 is no longer just for the code - the program - it's now to be ignored. Client apps are never
 going to be checking the HTTP status code, as it is always the same.
@@ -1037,16 +1065,27 @@ Then the HTTP verb is always a GET but the developer can express rich HTTP verbs
 still maintain a RESTful clean API.
 
 Create
+
+```
 /bears?method=post
 
+```
 Read
+```
 /bears
 
+```
 Update
+```
 /bears/1234?method=put&location=park
 
+```
 Delete
+
+```
 /bears/1234?method=delete
+
+```
 
 **WARNING:** _It can be dangerous to provide post or delete capabilities using a GET method
 because if the URL is in a Web page then a Web crawler like the Googlebot can create or
@@ -1094,10 +1133,10 @@ they can't use an OAuth library in their language because of your variation.
 Lets take a look at what some API requests and responses look like for our bears API.
 
 **Create a brown bear named Al**
-
+```
 POST /bears
 name=Al&furColor=brown
-
+```
 Response
 200 OK
 ```
@@ -1129,10 +1168,14 @@ Response
 
 **Tell me about a particular bear**
 
+```
 GET /bears/1234
-
+```
+```
 Response
 200 OK
+
+```
 ```
 {
 "bear":{
@@ -1144,10 +1187,14 @@ Response
 ```
 **Tell me about all the bears**
 
+```
 GET /bears
 
 Response
 200 OK
+
+```
+
 ```
 {
 "bears":
@@ -1167,12 +1214,13 @@ Response
 ```
 **Delete Rover :-(**
 
+```
 DELETE /bears/1234
 
 Response
 200 OK
 
-
+```
 ## Chatty APIs
 
 Let’s think about how app developers use that API you're designing and dealing with chatty
