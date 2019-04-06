@@ -38,10 +38,13 @@ bearmatic REST. What do we mean by bearmatic?
 You might have seen discussion threads on true REST - some of them can get pretty strict
 and wonky. Mike Schinkel sums it up well - defining a RESTafarian as follows:
 
-_“A_ RESTifarian _is a zealous proponent of the REST software architectural style as defined by
+```
+“A_ RESTifarian _is a zealous proponent of the REST software architectural style as defined by
 Roy T. Fielding in Chapter 5 of his PhD. dissertation at UC Irvine. You can find RESTifarians in
 the wild on the REST-discuss mailing list. But be careful, RESTifarians can be extremely
 meticulous when discussing the finer points of REST ...”_
+
+```
 
 Our view: approach API design from the ‘outside-in’ perspective. This means we start by
 asking - what are we trying to achieve with an API?
@@ -84,8 +87,10 @@ API for it.
 
 The first URL is for a collection; the second is for a specific element in the collection.
 
+```
 /bears /bears/
 
+```
 Boiling it down to this level will also force the verbs out of your base URLs.
 
 **Keep verbs out of your base URLs**
@@ -157,13 +162,14 @@ behaves. They can experiment with and learn the API without the documentation.
 
 In summary:
 
+```
 Use two base URLs per resource.
 
 Keep verbs out of your base URLs.
 
 Use HTTP verbs to operate on the collections and elements.
 
-
+```
 ## Plural nouns and concrete names
 
 Let’s explore how to pick the nouns for your URLs.
@@ -234,10 +240,15 @@ We're using HTTP verbs to operate on the resources and collections. Our bears be
 owners. To get all the bears belonging to a specific owner, or to create a new bear for that
 owner, do a GET or a POST:
 
+```
 GET /owners/5678/bears
 
+```
+
+```
 POST /owners/5678/bears
 
+```
 Now, the relationships can be complex. Owners have relationships with veterinarians, who
 have relationships with bears, who have relationships with food, and so on. It's not
 uncommon to see people string these together making a URL 5 or 6 levels deep. Remember
@@ -254,8 +265,10 @@ a resource.
 Make it simple for developers to use the base URL by putting optional states and attributes
 behind the HTTP question mark. To get all red bears running in the park:
 
+```
 GET /bears?color=red&state=running&location=park
 
+```
 In summary, keep your API intuitive by simplifying the associations between resources,
 and sweeping parameters and other complexities under the rug of the HTTP question
 mark.
@@ -290,23 +303,28 @@ Let's take a look at how three top APIs approach it.
 
 HTTP Status Code: 200
 
+```
 {"type" : "OauthException", "message":"(#803) Some of the
 aliases you requested do not exist: foo.bar"}
 
+```
 **Twilio**
 
 HTTP Status Code: 401
 
+```
 {"status" : "401", "message":"Authenticate","code": 20003, "more
 info": "http://www.twilio.com/docs/errors/20003"}
 
+```
 **SimpleGeo**
 
 HTTP Status Code: 401
 
+```
 {"code" : 401, "message": "Authentication Required"}
 
-
+```
 **Facebook**
 No matter what happens on a Facebook request, you get back the 200-status code -
 everything is OK. Many error messages also push down into the HTTP response. Here they
@@ -335,39 +353,51 @@ Therefore, most API providers use a small subset. For example, the Google GData 
 only 10 status codes; Netflix uses 9, and Digg, only 8.
 
 **Google GData**
+```
 200 201 304 400 401 403 404 409 410 500
 
+```
 **Netflix**
+```
 200 201 304 400 401 403 404 412 500
 
+```
 **Digg**
+```
 200 400 401 403 404 410 500 503
 
+```
 **How many status codes should you use for your API?**
 
 When you boil it down, there are really only 3 outcomes in the interaction between an app
 and an API:
 
+```
 - Everything worked - success
 - The application did something wrong – client error
 - The API did something wrong – server error
 
+```
 
 Start by using the following 3 codes. If you need more, add them. But you shouldn't need to
 go beyond 8.
 
+```
 - 200 - OK
 - 400 - Bad Request
 - 500 - Internal Server Error
 
+```
 If you're not comfortable reducing all your error conditions to these 3, try picking among
 these additional 5:
 
+```
 - 201 - Created
 - 304 - Not Modified
 - 404 – Not Found
 - 401 - Unauthorized
 - 403 - Forbidden
+```
 
 (Check out this good Wikipedia entry for all HTTP Status codes.)
 
@@ -482,21 +512,25 @@ If it doesn't change the logic for each response, like OAuth information, put it
 
 These for example, all represent the same resource:
 
+```
 bears/
 Content-Type: application/json
-
+```
+```
 bears/
 Content-Type: application/xml
-
+```
+```
 bears/
 Content-Type: application/png
+```
 
 The code we would write to handle the responses would be very different.
 
 There's no question the header is more correct and it is still a very strong API design.
 
 
-## Pagination and partial response....................................................................................................
+## Pagination and partial response
 
 Partial response allows you to give developers just the information they need.
 
