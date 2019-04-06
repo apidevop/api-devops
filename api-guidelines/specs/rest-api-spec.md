@@ -889,11 +889,12 @@ Code for ignoring
 200 - OK
 
 Message for people & code
+```
 {response_code" : 401, "message" : "Verbose, plain language
 description of the problem with hints about how to fix it."
 "more_info" : "http://dev.tecachbearrest.com/errors/12345",
 "code" : 12345}
-
+```
 **When a client supports limited HTTP methods**
 
 It is common to see support for GET and POST and not PUT and DELETE.
@@ -970,7 +971,7 @@ name=Al&furColor=brown
 
 Response
 200 OK
-
+```
 {
 "bear":{
 "id": "1234",
@@ -978,7 +979,7 @@ Response
 "furColor": "brown"
 }
 }
-
+```
 **Rename Al to Rover - Update**
 
 PUT /bears/1234
@@ -986,7 +987,7 @@ name=Rover
 
 Response
 200 OK
-
+```
 {
 "bear":{
 "id":"1234",
@@ -995,7 +996,7 @@ Response
 
 }
 }
-
+```
 
 **Tell me about a particular bear**
 
@@ -1003,7 +1004,7 @@ GET /bears/1234
 
 Response
 200 OK
-
+```
 {
 "bear":{
 "id":"1234",
@@ -1011,14 +1012,14 @@ Response
 "furColor": "brown"
 }
 }
-
+```
 **Tell me about all the bears**
 
 GET /bears
 
 Response
 200 OK
-
+```
 {
 "bears":
 [{"bear":{
@@ -1034,7 +1035,7 @@ Response
 
 [{"totalCount":327,"limit":25,"offset":100}]
 }
-
+```
 **Delete Rover :-(**
 
 DELETE /bears/1234
@@ -1226,8 +1227,8 @@ Subsystems often get more complex as they evolve.”
 Design Patterns – Elements of Reusable Object-Oriented Software_
 (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)
 
-Implementing an API façade pattern involves three basic steps.
-
+## Implementing an API façade pattern involves three basic steps.
+```
 1 - Design the ideal API – design the URLs, request parameters and responses, payloads,
 headers, query parameters, and so on. The API design should be self-consistent.
 
@@ -1235,6 +1236,7 @@ headers, query parameters, and so on. The API design should be self-consistent.
 API and give you feedback even before your API is connected to internal systems.
 
 3 - Mediate or integrate between the façade and the systems.
+```
 
 ##API Facade
 Using the three-step approach you’ve decomposed one big problem to three smaller
