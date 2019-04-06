@@ -1365,7 +1365,6 @@ If you want to do a global search across resources, we suggest you follow the Go
 
 ```
 /search?q=fluffy+fur
-
 ```
 Here, search is the verb; **?q** represents the query.
 
@@ -1376,7 +1375,6 @@ search in bears owned by resource ID 5678
 
 ```
 /owners/5678/bears?q=fluffy+fur
-
 ```
 Notice that we’ve dropped the explicit search in the URL and rely on the parameter ‘q’ to
 indicate the scoped query. (Big thanks to the contributors on the API Craft Google group for
@@ -1461,7 +1459,6 @@ api developers (if from browser)
 dev  developers
 
 developer  developers
-
 ```
 
 ## Tips for handling exceptional behavior
@@ -1503,11 +1500,9 @@ respond to it.
 **Overall recommendations:**
 
 ```
-
 1 - Use suppress_response_codes = true
 
 2 - The HTTP code is no longer just for the code
-
 ```
 The rules from our previous Handling Errors section change. In this context, the HTTP code
 is no longer just for the code - the program - it's now to be ignored. Client apps are never
@@ -1549,7 +1544,6 @@ Create
 
 ```
 /bears?method=post
-
 ```
 Read
 ```
@@ -1565,7 +1559,6 @@ Delete
 
 ```
 /bears/1234?method=delete
-
 ```
 
 **WARNING:** _It can be dangerous to provide post or delete capabilities using a GET method
@@ -1617,7 +1610,6 @@ Lets take a look at what some API requests and responses look like for our bears
 ```
 POST /bears
 name=Al&furColor=brown
-
 ```
 Response
 200 OK
@@ -1630,7 +1622,6 @@ Response
 "furColor": "brown"
 }
 }
-
 ```
 **Rename Al to Rover - Update**
 
@@ -1640,7 +1631,6 @@ name=Rover
 
 Response
 200 OK
-
 ```
 ```
 {
@@ -1661,7 +1651,6 @@ GET /bears/1234
 ```
 Response
 200 OK
-
 ```
 
 ```
@@ -1680,7 +1669,6 @@ GET /bears
 
 Response
 200 OK
-
 ```
 
 ```
@@ -1707,7 +1695,6 @@ DELETE /bears/1234
 
 Response
 200 OK
-
 ```
 
 ## Correlation Id ##
@@ -1729,7 +1716,6 @@ It is recommended to use a **UUID** as Correlation Id. That allows our systems t
 	{   
 	   "Correlation-Id": <UUID>
 	}
-
 ```
 > :information_source: [Kong plugins](https://getkong.org/plugins/correlation-id/)
 
@@ -2251,8 +2237,8 @@ Design Patterns – Elements of Reusable Object-Oriented Software_
 (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)
 
 ## Implementing an API façade pattern involves three basic steps.
-```
-1 - Design the ideal API – design the URLs, request parameters and responses, payloads,
+
+```1 - Design the ideal API – design the URLs, request parameters and responses, payloads,
 headers, query parameters, and so on. The API design should be self-consistent.
 
 2 - I mplement the design with data stubs. This allows application developers to use your
