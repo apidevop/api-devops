@@ -488,10 +488,10 @@ As a rule, the API Management gateway MUST pass an additional header with the ca
 * Extension `port`: OPTIONAL - The port of the API Gateway. Usually this can be assumed to be `443` if `proto` equals `https`; use if deviating
 * Extension `prefix`: The base path of the API on the API Gateway, e.g. `/someapi/v1`. 
 
-**Example**: A request goes to `https://api.contenthub.haufe.io/ingest/v1/bulk/63874638746834`, which is forwarded to the ingest service in the backend. The API Gateway must pass on this information in the following way:
+**Example**: A request goes to `https://api.contenthub.org.io/ingest/v1/bulk/63874638746834`, which is forwarded to the ingest service in the backend. The API Gateway must pass on this information in the following way:
 
 ```
-Forwarded: proto=https;host=api.contenthub.haufe.io;port=443;prefix=/ingest/v1
+Forwarded: proto=https;host=api.contenthub.org.io;port=443;prefix=/ingest/v1
 ```
 
 If present, this header MUST be used to assemble hypermedia links in responses, so that an API consumer is directed to the right place.
@@ -506,7 +506,7 @@ The list here represents only a subset of possible formats. Refer to [On Choosin
 Regardless of your choice all formats need to support link relation elements.
 
 * Use **IANA** defined link relation attribute values by default - you can find the list of supported values [here](http://www.iana.org/assignments/link-relations/link-relations.xhtml).
-* if new link relation attributes are required, register them with IANA (alternative or fallback is the canonicalized list maintained by Haufe CTO Office). Please contact the CTO Office for the latter.
+* if new link relation attributes are required, register them with IANA (alternative or fallback is the canonicalized list maintained by org CTO Office). Please contact the CTO Office for the latter.
 
 A response SHOULD return related and valid link elements, and MUST return a link element to **self**.
 
@@ -1721,8 +1721,8 @@ It is recommended to use a **UUID** as Correlation Id. That allows our systems t
 
 ## Create Correlation Id with Wicked ##
 
-Haufes [API Management Solution Wicked](http://wicked.haufe.io/) supports the creation of Correlation Id.
-Read more [at](http://wickedhaufeio.readthedocs.io/en/stable/configuring-kong-plugins/).
+orgs [API Management Solution Wicked](http://wicked.org.io/) supports the creation of Correlation Id.
+Read more [at](http://wickedorgio.readthedocs.io/en/stable/configuring-kong-plugins/).
 
 ## Collection Resources
 A list of all of the given resources, including any related metadata. Array of resources should be in the `_embedded` field. Fields like `total_items` and `total_pages` help provide context to paged results. Consistent naming of collection resource fields allow API clients to create generic handling for using the provided data across various resource collections.
@@ -1936,7 +1936,7 @@ Note that server-generated values are not provided in the request.
 ##### Example Response
 
 	201 Created
-	Location: http://api.haufe-lexware.com/user_management/v1/users/E75E30C0607446219C6EA31735C691B9
+	Location: http://api.org-lexware.com/user_management/v1/users/E75E30C0607446219C6EA31735C691B9
 
 	{
 	  "_links":
