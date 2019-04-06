@@ -209,6 +209,106 @@ In summary, an intuitive API uses plural rather than singular nouns, and concret
 than abstract names.
 
 
+## Type Formatting
+
+### Boolean
+
+A boolean is represented with **true** or **false**.
+
+### Dates and Times
+
+Use [**ISO 8601**](http://en.wikipedia.org/wiki/ISO_8601) format for passing in and out dates and times. Use [**UTC**](https://en.wikipedia.org/wiki/UTC) as timezone.
+
+|Date|2015-07-02|
+|---|---|
+|Combined date and time in [**UTC**](https://en.wikipedia.org/wiki/UTC)|2015-07-02T14:47:47Z|
+
+
+### Currency
+
+Use [**3-character ISO-4217**](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) codes for specifying currencies.
+
+##### Samples
+	 EUR - Euro  
+	 CHF - Swiss franc  
+	 USD - US Dollar  
+
+### Country
+
+Use country codes defined by the [**ISO 3166-1-alpha-2**](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code standard.
+
+##### Samples
+	 AD - Andorra  
+	 DE - Germany  
+	 FR - France  
+	 US - United States of America  
+
+### Amount
+
+Use the format [0-9]+(\.[0-9]+)? to represent an amount like money.
+Separate amount and currency in different fields.
+
+##### Samples
+	     12.23
+	   3789.1
+	  56782
+	    -12.02
+	   +231.98
+
+### UUID
+
+A UUID or GUID is represented in the Format  '**dddddddd-dddd-dddd-dddd-dddddddddddd**' where each `d` represents `[A-Fa-f0-9]`.
+
+##### Samples
+	 56e94f2b-25ac-4c58-9828-f63b66220999
+	 2ABAD998-48F6-4847-9EB2-2A6B5328C51D
+	 
+
+##HTTP Status Codes
+The following table lists the HTTP response status codes for the `GET` (retrieve), `POST` (create), `PUT` (modify), and `DELETE` operations.
+
+<div><table><colgroup><col><col><col><col></colgroup><thead><tr><th>Response Code</th><th>HTTP Operation</th><th>Response Body Contents</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td>GET, PUT, DELETE</td><td>Resource</td><td>No error, operation successful.</td></tr><tr><td>201 Created</td><td>POST</td><td>Resource that was created</td><td>Successful creation of a resource. The Location HTTP Header can provide a link to the newly created resource.</td></tr><tr><td>204 No Content</td><td>POST, PUT, DELETE</td><td>N/A</td><td>The request was processed successfully, but no response body is needed.</td></tr><tr><td>304 Not Modified</td><td>conditional GET</td><td>N/A</td><td>Resource has not been modified. <span style="line-height: 1.4285;">Used when HTTP caching headers are in play.</span></td></tr><tr><td>400 Bad Request</td><td>GET, POST, PUT, DELETE</td><td>Error Message</td><td>Malformed syntax or a bad query.</td></tr><tr><td>401 Unauthorized</td><td>GET, POST, PUT, DELETE</td><td>Error Message</td><td>Action requires user authentication.</td></tr><tr><td>403 Forbidden</td><td>GET, POST, PUT, DELETE</td><td>Error Message</td><td>
+
+When authentication succeeded but authenticated user doesn't have access to the resource.
+
+</td></tr><tr><td>404 Not Found</td><td>GET, POST, PUT, DELETE</td><td>Error Message</td><td>Resource not found.</td></tr><tr><td>405 Not Allowed</td><td>GET, POST, PUT, DELETE</td><td>Error Message</td><td>Method not allowed on resource.</td></tr><tr><td>406 Not Acceptable</td><td>GET</td><td>Error Message</td><td>Requested representation not available for the resource.</td></tr><tr><td>408 Request Timeout</td><td>GET, POST</td><td>Error Message</td><td>Request has timed out.</td></tr><tr><td>409 Resource Conflict</td><td>PUT, PUT, DELETE</td><td>Error Message</td><td>State of the resource doesn't permit request.</td></tr><tr><td>410 Gone</td><td>GET, PUT</td><td>Error Message</td><td>
+
+Indicates that the resource at this end point is no longer available. Useful as a blanket response for old API versions
+
+</td></tr><tr><td>411 Length Required</td><td>POST, PUT</td><td>Error Message</td><td>The server needs to know the size of the entity body and it should be specified in the Content Length header.</td></tr><tr><td>412 Precondition failed</td><td>GET</td><td>Error Message</td><td>Operation not completed because preconditions were not met.</td></tr><tr><td>415 Unsupported Type</td><td>POST, PUT</td><td>Error Message</td><td>Representation not supported for the resource.</td></tr><tr><td>422 Unprocessable Entity</td><td>POST, PUT</td><td>Error Message</td><td>
+
+Used for validation errors
+
+</td></tr><tr><td>500 Server Error</td><td>GET, POST, PUT</td><td>Error Message</td><td>Internal server error.</td></tr><tr><td>501 Not Implemented</td><td>POST, PUT, DELETE</td><td>Error Message</td><td>Requested HTTP operation not supported.</td></tr></tbody></table></div>
+
+## Resources
+
+The fundamental concept in any RESTful API is the **resource**. One of the first steps in developing a RESTful web service is designing the resource model.
+The resource model identifies and classifies all the resources the client uses to interact with the Server.
+
+**Design your API with the API consumer in mind!**
+
+Each resource MUST make sense from the perspective of the API consumer.
+Beware of simply copy your internal model. Do not leak irrelevant implementation details out to your API.
+
+A resource is an object with a type, associated data, relationships to other resources, and a set of methods that operate on it. HTTP verbs are used to manipulate the resources.
+
+Resources can be grouped into **collections**. Each collection is homogeneous so that it contains only one type of resource, and unordered. Resources can also exist outside any collection. In this case, we refer to these resources as singleton resources. Collections are themselves resources as well.
+
+Collections can exist globally at the top level of an API, but can also be contained inside a single resource. In the latter case, we refer to these collections as sub-collections. Sub-collections are usually used to express some kind of “contained in” relationship. We go into more detail on this in [Relationships and Sub-Resources](../relationships-and-sub-resources/relationships-and-sub-resources.md).
+
+The diagram below illustrates the key concepts in a RESTful API.
+
+![Rest Resource Model](restresourcemodel.png)
+
+We call information that describes available resources types, their behavior, and their relationships the resource model of an API. The resource model can be viewed as the RESTful mapping of the application data model.
+
+Find more details in the chapters:
+
+- [Collection Resources](../collection-resources/collection-resources.md)
+- [Filtering, sorting, field selection and paging](../filtering-sorting-field-selection-and-paging/filtering-sorting-field-selection-and-paging.md)
+
+	 
 ## Request headers Parameters
 | Parameter name   | Required      | Description  |
 | :------------- | :-------------: | :-----|
@@ -275,6 +375,94 @@ GET /bears?color=red&state=running&location=park
 In summary, keep your API intuitive by simplifying the associations between resources,
 and sweeping parameters and other complexities under the rug of the HTTP question
 mark.
+
+## Filtering, sorting, field selection and paging
+### Filtering
+Use a unique query parameter for all fields or a query language for filtering.
+
+	GET /cars?color=red Returns a list of red cars
+	GET /cars?type=%2Avan%2A Returns a list of cars whose type contains the 'van' word (Minivan, Cargo Van...). %2A is the encoded form of the * wildcard. 
+	GET /cars?seats<=2 Returns a list of cars with a maximum of 2 seast
+
+### Time selection
+
+`start_time` or `{property_name}_from`, `end_time` or `{property_name}_to` query parameters should be provided if time selection is needed.
+
+### Sorting
+
+Allow ascending and descending sorting over multiple fields.
+
+	GET /cars?sort=-manufactorer,+model
+
+
+This returns a list of cars sorted by descending manufacturers and ascending models.
+
+The sort order for each sort field **MUST** be specified with one of the following prefixes:
+
+- Plus (U+002B PLUS SIGN, "+") to request an ascending sort order.
+- Minus (U+002D HYPHEN-MINUS, "-") to request a descending sort order.
+
+### Field selection
+
+Mobile clients display just a few attributes in a list. They don’t need all attributes of a resource. Give the API consumer the ability to choose returned fields. This will also reduce the network traffic and speed up the usage of the API.
+
+	GET /cars?fields=manufacturer,model,id,color
+
+
+### Paging
+
+There are two popular ways how to support paging.
+
+#### limit and offset style
+
+Use **limit** and **offset**. It is flexible for the user and common in API implementations (Facebook). The default should be limit=**20** and offset=**0**.
+
+	GET /products?limit=25&offset=50
+
+
+##### Response Fields
+	{
+	   "limit": 25,
+	   "offset": 50,
+	   "total_count": 1634
+	}
+
+|Name|Type|Description|
+|---|---|---|
+|offset|Integer|The offset used in the execution of the query.|
+|limit|Integer|The limit used in the execution of the query.|
+|total_count|Integer|The total number of records available.|
+
+#### Page style
+
+Pages of results should be referred to consistently by the query parameters `page` and `page_size`, where `page_size` refers to the amount of results per request, and `page` refers to the requested page. Additionally, responses should include `total_count` and `total_pages` whenever possible, where `total_count` indicates the total records in the requested collection, and `total_pages` is the number of pages (interpolated from `total_count`/`page_size`).
+
+The default should be `page=1` and `page_size=20`.
+
+	GET /products?page=2&page_size=30
+
+
+##### Response Fields
+
+	{
+	   "page": 2,
+	   "page_size": 30,
+	   "total_count": 1634,
+	   "total_pages": 55
+	}
+
+|Name|Type|Description|
+|---|---|---|
+|page|Integer|The page used in the execution of the query.|
+|page_size|Integer|The page_size used in the execution of the query.|
+|total_count|Integer|The total number of records available.|
+|total_pages|Integer|The total number of pages available|
+
+### Hypermedia links
+
+Hypermedia links are high value in navigating paged resource collections, as `page`/`page_size` query parameters can be maintained while navigating pages of results.
+
+Links should be provided with `rels` of `next`, `previous`, `first`, `last` wherever appropriate.
 
 
 ## Handling errors
@@ -1262,6 +1450,264 @@ Response
 200 OK
 
 ```
+
+## Correlation Id ##
+
+It is extremely hard to analyse incorrect and faulty behaviour in a distributed system environment. Systems are calling other systems either synchronous or ansynchronous to fulfill a request. Each system logs to its own logging target. Manually analyzing the way of a request is a nightmare. To set up automated failure analytics is errorprone and brittle.
+The [Correlation Pattern](http://www.enterpriseintegrationpatterns.com/patterns/messaging/CorrelationIdentifier.html), which depends on the use of Correlation ID is a well documented Enterprise Integration Pattern. Its target is to correlate requests over multiple systems and responses to another.
+
+A Correlation ID is a unique identifier value that is attached to requests and messages that allow reference to a particular transaction or event chain. Attaching a Correlation ID to a request is arbitrary. You don’t have to use one. But if you are designing a distributed system that incorporates message queues and asynchronous processing, you will do well to include a Correlation ID in your messages. And even in synchronous chains it helps you to follow the call squence over different systems.
+
+The Correlation Id is build by the client or as early as possible in the request chain. If a request contains no Correlation Id header it is up to each system to create and add it to the header.
+It is the responsibility of each part/service/system in the chain to extract the Correlation Id from the request and use it in log entries. Calls to subsequent subsystems must contain the Correlation Id.
+
+Currently there is no standard that fixes the field name for the Correlation Id. X-Headers are deprecated, see [https://tools.ietf.org/html/rfc6648](https://tools.ietf.org/html/rfc6648) and [https://tools.ietf.org/html/rfc7231#section-8.3.1](https://tools.ietf.org/html/rfc7231#section-8.3.1).
+
+We chose the name **Correlation-Id**.
+It is recommended to use a **UUID** as Correlation Id. That allows our systems to validate the Correlation Id with a regular expression and therefore prevent against log forging attacks.
+
+```
+	{   
+	   "Correlation-Id": <UUID>
+	}
+
+```
+> :information_source: [Kong plugins](https://getkong.org/plugins/correlation-id/)
+
+## Create Correlation Id with Wicked ##
+
+Haufes [API Management Solution Wicked](http://wicked.haufe.io/) supports the creation of Correlation Id.
+Read more [at](http://wickedhaufeio.readthedocs.io/en/stable/configuring-kong-plugins/).
+
+## Collection Resources
+A list of all of the given resources, including any related metadata. Array of resources should be in the `_embedded` field. Fields like `total_items` and `total_pages` help provide context to paged results. Consistent naming of collection resource fields allow API clients to create generic handling for using the provided data across various resource collections.
+
+The GET verb should not affect the system, and should not change response on subsequent requests (unless the underlying data changes), i.e. it should be idempotent. Exceptions to 'changing the response' are typically instrumentation/logging-related.
+
+The list of data is presumed to be filtered based on the provided security context of the API client, this should not be a list of all resources in the domain.
+
+Providing a summarized, or minimized version of the data representation can reduce the bandwidth footprint, in cases where individual resources contain a large object.
+
+### Resource naming
+
+Collection resource names should be plural nouns, e.g. `/users`. This helps visually disambiguate collections from singletons.
+Please have a look at [REST principles](../rest-principles/rest-principles.md) for naming Guidelines.
+
+### Get List of resources
+
+##### URI Template
+
+	GET /{namespace}/{version}/{resource}
+
+
+##### Example Request
+
+	GET /user_management/v1/users
+
+
+##### Example Response
+
+HAL response format
+
+	{
+	  "_links":
+		{
+	    "self": { "href": "{baseurl}/users"},
+	    "first": { "href": "{baseurl}/users?page=1"},
+	    "last": { "href": "{baseurl}/users?page=11"},
+	    "next": { "href": "{baseurl}/users?page=2"},
+	    "find": { "href": "{baseurl}/users{?id}", "templated": true}
+	  },
+	  "page": 1,
+	  "page_size": 20,
+	  "total_pages" : 11,
+	  "total_count": 217,
+	  "_embedded":
+		{
+	    "users":
+			[
+	      {
+	        "_links": {
+	          "self": { "href": "{baseurl}/users/A14DA7707FE2458DAE37C2CF81E8F9B1" }
+	        },
+	        "id" : "A14DA7707FE2458DAE37C2CF81E8F9B1",
+	        "name" : "Mustermann"
+	      },
+	      {
+	        "_links": {
+	          "self": { "href": "{baseurl}/users/BE14A7269802498F992813885546D058" }
+	        },
+	        "id" : "BE14A7269802498F992813885546D058",
+	        "name" : "VIPUser"      
+	      }
+	    ]
+	  }
+	}
+
+
+
+#### HTTP Status
+
+If the collection is empty (0 items in response), `404 Not Found` is not appropriate. The corresponding array should just be empty, and collection metadata fields provided (e.g. `"total_count": 0`). Invalid query parameter values can result in 400 Bad Request. Otherwise `200 OK` is utilized for a successful response.
+
+### Read Single Resource
+
+A single resource, typically derived from the parent collection of resources (often more detailed than the collection resource items).
+
+Executing GET should never affect the system, and should not change response on subsequent requests, i.e. it should be idempotent.
+
+> All identifiers for sensible resources (customers, individuals) should be non-sequential, and preferrably non-numeric.
+
+In scenarios where this data might be used as a subordinate to other data, immutable string identifiers should be utilized for easier readability and debugging (i.e. "NAME_OF_VALUE" vs 1421321).
+
+##### URI Template
+
+	GET /{namespace}/{version}/{resource}/{resource-id}
+
+
+##### Example Request
+
+	GET /user_management/v1/users/BE14A7269802498F992813885546D058
+
+
+##### Example Response
+
+	{
+	  "_links":
+		{
+	    "self": { "href": "{baseurl}/users/BE14A7269802498F992813885546D058" },
+	  }
+	  "id": "BE14A7269802498F992813885546D058",
+	  "name": "Mustermann"
+	}
+
+
+##### HTTP Status
+
+If the provided resource identifier is not found, responds `404 Not Found` HTTP status. Otherwise, `200 OK` HTTP status should be utilized when data is found.
+
+### Update Single Resource
+
+Updates a single resource. The shape of the PUT request should maintain parity with the GET response for the selected resource. Fields in the request body can be optional or ignored during deserialization, such as `create_time` or other system-calculated values.
+
+##### URI Template
+
+	PUT /{namespace}/{version}/{resource}/{resource-id}
+
+
+##### Example Request
+
+	PUT /user_management/v1/users/BE14A7269802498F992813885546D058
+	{
+	  "id": "BE14A7269802498F992813885546D058",
+	  "name": "Changed Name"
+	}
+
+
+##### HTTP Status
+
+Any failed request validation responds `400 Bad Request` HTTP status. If clients attempt to modify read-only fields, this is also a `400 Bad Request`.
+
+If there are business rules (more than data type/length/etc), it is best to provide a specific error code & message (in addition to the 400) for that validation.
+
+For situations which require interaction with APIs or processes outside of the current request, the `422 Unprocessable Entity` status code is appropriate.
+
+After successful update, PUT operations should respond with `204 No Content` status, with no response body.
+
+### Update Partial Single Resource
+
+##### Support of partial updates is optional.
+
+PATCH updates a part of a single resource. Unlike PUT, which requires parity with GET, PATCH merely changes the fields provided, and leaves the rest of the resource unaffected.
+
+HTTP PATCH method has been been formalized in [RFC 7386: JSON Merge Patch](https://tools.ietf.org/html/rfc7386).
+
+Response should be `204 No Content` and no response body. Because PATCH is often called frequently in interactive form UX design, returning the entire response could be irresponsible from a bandwidth perspective, especially in mobile scenarios.
+
+System generated values should be commonly changed by an update,
+
+##### URI Template
+
+	PATCH /{namespace}/{version}/{resource}/{resource-id}
+
+
+##### Example Request
+
+	PATCH /user_management/v1/users/BE14A7269802498F992813885546D058
+	{
+	  "name" : "newname"
+	}
+
+
+##### Example Response
+
+	204 No Content
+
+##### HTTP Status
+
+Status/response for PATCH is the same as PUT.
+
+### Delete Single Resource
+
+Deletes a single resource. In order to enable retries (typically patchy connectivity), DELETE is treated as idempotent, so it should always respond with a `204 No Content` HTTP status.
+`404 Not Found` HTTP status should **not** be utilized here, as on a second retry a client might mistakenly think the resource never existed at all. GET can be utilized to verify the resources exists prior to DELETE.
+
+##### URI Template
+
+	DELETE /{namespace}/{version}/{resource}/{resource-id}
+
+##### Example Request
+
+	DELETE /user_management/v1/users/BE14A7269802498F992813885546D058
+
+##### Example Response
+
+	204 No Content
+
+### Create New Resource
+
+Creates a new resource in the collection. Request body may be somewhat different than GET/PUT response/request (typically fewer fields as the server will generate some values).
+
+In most cases, the API server produces an identifier for the resource. In cases where identifier is supplied by the API consumer, use [Create New Resource - Consumer Supplied Identifier](#create-new-resource---consumer-supplied-identifier) below.
+
+Once the POST has successfully completed, a new resource will be created. The identifier for this resource should be added to the resource collection URI.
+
+Hypermedia links provide an easy way to get the URL of the newly created resource, using the rel: self, in addition to other links for operations allowed for the new resource. Addionally a location header in the response can point to the newly created resource.
+
+##### URI Template
+
+	POST /{namespace}/{version}/{resource}
+
+##### Example Request
+
+Note that server-generated values are not provided in the request.
+
+	POST /user_management/v1/users
+
+	{
+	    "name": "MyName123",
+	}
+
+##### Example Response
+
+	201 Created
+	Location: http://api.haufe-lexware.com/user_management/v1/users/E75E30C0607446219C6EA31735C691B9
+
+	{
+	  "_links":
+		{
+	    "self": { "href": "{baseurl}/users/E75E30C0607446219C6EA31735C691B9" },
+	  }
+	  "id": "E75E30C0607446219C6EA31735C691B9",
+	  "name": "MyName123"
+	}
+
+### Create New Resource - Consumer Supplied Identifier
+
+When an API consumer defines the resource identifier, the PUT verb should be utilized, as the operation is idempotent, even during creation.
+
+The same interaction as  [Create New Resource](#create-new-resource) is used here. 201 + response body on resource creation, and 204 + no response body when an existing resource is updated.
+
 ## Chatty APIs
 
 Let’s think about how app developers use that API you're designing and dealing with chatty
