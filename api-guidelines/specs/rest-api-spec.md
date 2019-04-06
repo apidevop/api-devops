@@ -1,4 +1,4 @@
-# REST API specification
+# REST API Specification
 
 ## Content
 
@@ -178,7 +178,10 @@ Should you choose singular or plural nouns for your resource names? You'll see p
 APIs use both. Let's look at a few examples:
 
 **Foursquare GroupOn Zappos**
+```
 /checkins /deals /Product
+
+```
 
 Given that the first thing most people probably do with a RESTful API is a GET, we think it
 reads more easily and is more intuitive to use plural nouns. But above all, avoid a mixed
@@ -304,8 +307,8 @@ Let's take a look at how three top APIs approach it.
 HTTP Status Code: 200
 
 ```
-{"type" : "OauthException", "message":"(#803) Some of the
-aliases you requested do not exist: foo.bar"}
+{"type" : "OauthException", "message":"(#803) 
+Some of the aliases you requested do not exist: foo.bar"}
 
 ```
 **Twilio**
@@ -322,8 +325,8 @@ info": "http://www.twilio.com/docs/errors/20003"}
 HTTP Status Code: 401
 
 ```
-{"code" : 401, "message": "Authentication Required"}
-
+{"code" : 401, 
+"message": "Authentication Required"}
 ```
 **Facebook**
 No matter what happens on a Facebook request, you get back the 200-status code -
