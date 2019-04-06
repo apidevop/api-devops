@@ -39,10 +39,10 @@ You might have seen discussion threads on true REST - some of them can get prett
 and wonky. Mike Schinkel sums it up well - defining a RESTafarian as follows:
 
 ```
-“A_ RESTifarian _is a zealous proponent of the REST software architectural style as defined by
+“A RESTifarian is a zealous proponent of the REST software architectural style as defined by
 Roy T. Fielding in Chapter 5 of his PhD. dissertation at UC Irvine. You can find RESTifarians in
 the wild on the REST-discuss mailing list. But be careful, RESTifarians can be extremely
-meticulous when discussing the finer points of REST ...”_
+meticulous when discussing the finer points of REST”
 
 ```
 
@@ -546,7 +546,10 @@ responses, including Google who pioneered the idea of **partial response**.
 
 **LinkedIn**
 
+```
 /people:(id,first-name,last-name,industry)
+
+```
 
 This request on a person returns the ID, first name, last name, and the industry.
 
@@ -555,11 +558,17 @@ Plus it's difficult for a developer to reverse engineer the meaning using a sear
 
 **Facebook**
 
+```
 /joe.smith/friends?fields=id,name,picture
+
+```
 
 **Google**
 
+```
 ?fields=title,media:group(media:thumbnail)
+
+```
 
 Google and Facebook have a similar approach, which works well.
 
@@ -575,8 +584,10 @@ The Google approach works extremely well.
 
 Here's how to get just the information we need from our bears API using this approach:
 
+```
 /bears?fields=name,color,location
 
+```
 It's simple to read; a developer can select just the information an app needs at a given time;
 it cuts down on bandwidth issues, which is important for mobile apps.
 
@@ -595,6 +606,7 @@ Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn sta
 is used in the same way as the Facebook offset & limit.
 
 To get records 50 through 75 from each system, you would use:
+
 ```
 - Facebook - **offset 50** and **limit 25**
 - Twitter - **page 3** and **rpp 25** (records per page)
@@ -606,8 +618,10 @@ To get records 50 through 75 from each system, you would use:
 We recommend limit and offset. It is more common, well understood in leading databases,
 and easy for developers.
 
+```
 /bears?limit=25&offset=
 
+```
 **Metadata**
 
 We also suggest including metadata with each response that is paginated that indicated to
@@ -643,6 +657,7 @@ response.
 Calculate
 Translate
 Convert
+
 ```
 For example, you want to make a simple algorithmic calculation like how much tax
 someone should pay, or do a natural language translation (one language in request;
@@ -655,7 +670,10 @@ In these cases:
 
 For example, an API to convert 100 euros to Chinese Yen:
 
+```
 /convert?from=EUR&to=CNY&amount=
+
+```
 
 **Make it clear in your API documentation that these “non-resource” scenarios are
 different.**
@@ -699,6 +717,7 @@ document what to do if there are conflicts.
 We recommend the Foursquare approach.
 
 To get the JSON format from a collection or specific element:
+
 ```
 bears.json
 ```
@@ -729,13 +748,21 @@ This time, let's talk about what happens when a response comes back.
 Here are API responses from a few leading APIs:
 
 **Twitter**
+
+```
 "created_at": "Thu Nov 03 05:19;38 +0000 2011"
-
+```
 **Bing**
-"DateTime": "2011-10-29T09:35:00Z"
 
+```
+"DateTime": "2011-10-29T09:35:00Z"
+```
 **Foursquare**
+
+```
 "createdAt": 1320296464
+
+```
 
 They each use a different code convention. Although the Twitter approach is familiar to me
 as a Ruby on Rails developer, we think that Foursquare has the best approach.
@@ -777,16 +804,20 @@ Our Goal is to provide self describing APIs where links help the API consumer ho
 
 ### Hypermedia Support for relationships
 
-A response ...
+A response
+
 ```
 - MUST return a link element to **self**
 - MUST return links to **sub-resource**
 - SHOULD return links to **related objects**
+
 ```
 ##### Example Request
 
+	```
 	GET /invoices/INV-567A89HG1
-
+	
+    ```
 
 ##### Example Response
 HAL response Format
@@ -1139,9 +1170,11 @@ Lets take a look at what some API requests and responses look like for our bears
 ```
 POST /bears
 name=Al&furColor=brown
+
 ```
 Response
 200 OK
+
 ```
 {
 "bear":{
@@ -1150,14 +1183,18 @@ Response
 "furColor": "brown"
 }
 }
+
 ```
 **Rename Al to Rover - Update**
 
+```
 PUT /bears/1234
 name=Rover
 
 Response
 200 OK
+
+```
 ```
 {
 "bear":{
@@ -1179,6 +1216,7 @@ Response
 200 OK
 
 ```
+
 ```
 {
 "bear":{
