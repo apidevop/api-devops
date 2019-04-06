@@ -1,6 +1,6 @@
 # REST API specification
 
-## List of topics
+## Content
 
 - Introduction REST API Design
 - Nouns are good; verbs are bad
