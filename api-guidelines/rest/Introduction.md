@@ -1,4 +1,4 @@
-##What is an API?
+## What is an API?
 
 In the simplest of terms, API is the acronym for Application Programming
 Interface, which is a software intermediary that allows two applications to
@@ -104,7 +104,7 @@ of time going through documentation to utilize an XML-RPC API, and
 keeping documentation in sync with the API was of utmost importance, as
 otherwise a developer’s attempts at integrating it would be futile.
 
-##JSON-RPC
+## JSON-RPC
 Introduced in 2002, the JavaScript Object Notation was developed by State
 Software, Inc. and made most famous by Douglas Crawford. The format
 was originally designed to take advantage of JavaScript’s ability to act as a
