@@ -89,9 +89,7 @@ API for it.
 
 The first URL is for a collection; the second is for a specific element in the collection.
 
-```
-/bears /bears/
-
+```/bears /bears/
 ```
 Boiling it down to this level will also force the verbs out of your base URLs.
 
