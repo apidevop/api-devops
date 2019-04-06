@@ -40,8 +40,10 @@ and wonky. Mike Schinkel sums it up well - defining a RESTafarian as follows:
 
 ```
 “A RESTifarian is a zealous proponent of the REST software architectural style as defined by
-Roy T. Fielding in Chapter 5 of his PhD. dissertation at UC Irvine. You can find RESTifarians in
-the wild on the REST-discuss mailing list. But be careful, RESTifarians can be extremely
+Roy T.Fielding in Chapter 5 of his PhD. dissertation at UC Irvine. 
+You can find RESTifarians in the wild on the REST-discuss mailing list. 
+
+But be careful, RESTifarians can be extremely 
 meticulous when discussing the finer points of REST”
 
 ```
